@@ -3,8 +3,11 @@ var router = express.Router();
 var fs = require('fs');
 var _ = require('lodash');
 var Manifest = require('../models/manifest.js');
+var ShipsLog = require('../models/shipslog.js');
 
+var shipslog = new ShipsLog();
 var manifest = new Manifest();
+
 /* GET home page with login redirection. */
 router.get('/', function(req, res, next) {
   if(req.cookies.userid) {
@@ -14,6 +17,13 @@ router.get('/', function(req, res, next) {
     console.log(" -- login route -- ");
     res.redirect('/login');
   }
+});
+
+/* POST new log from user logged in home. */
+router.post('/', function (req, res, next) {
+  var linkOfficer = manifest.getOfficer(req.cookies.userid);
+  var addedLog = shipslog.addLog(req.body.text, req.body.img, linkOfficer);
+  manifest.getOfficer(req.cookies.userid).transmissions.push(addedLog);
 });
 
 /* GET signup page.*/
