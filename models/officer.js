@@ -10,7 +10,7 @@ Officer.prototype.getTransmissions = function() {
 };
 
 Officer.prototype.getUserName = function() {
-  return this.user_name
+  return this.user_name;
 };
 
 module.exports = Officer;
