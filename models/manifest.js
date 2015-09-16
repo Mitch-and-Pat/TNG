@@ -47,5 +47,13 @@ Manifest.prototype.verify = function (username) {
   return zee;
 };
 
+Manifest.prototype.getOfficer = function (username) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      return this.officers[i];
+    }
+  }
+};
+
 
 module.exports = Manifest;
