@@ -4,14 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-
 var app = express();
+
+var Manifest = require('./models/manifest.js');
+var ShipsLog = require('./models/shipslog.js');
+app.locals.shipslog = new ShipsLog();
+app.locals.manifest = new Manifest();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

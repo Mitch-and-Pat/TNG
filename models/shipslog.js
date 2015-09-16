@@ -27,4 +27,5 @@ ShipsLog.prototype.addLog = function(text,img,user) {
   return o[Object.keys(o).length];
 };
 
+
 module.exports = ShipsLog;
