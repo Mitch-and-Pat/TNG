@@ -17,18 +17,19 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST new log from user logged in home. */
-router.post('/', function (req, res, next) {
-  // console.log(req.app.locals.shipslog);
+router.post('/newlog', function (req, res, next) {
+  console.log("Post submitted!");
+  console.log(req.body.text);
   var linkOfficer = req.app.locals.manifest.getOfficer(req.cookies.userid);
   var addedLog = req.app.locals.shipslog.addLog(req.body.text, req.body.img, linkOfficer);
   req.app.locals.manifest.getOfficer(req.cookies.userid).transmissions.push(addedLog);
-
+  res.send("");
 });
 
-/* POST new log from user logged in home. */
-router.get('/posts.json', function (req, res) {
-  res.json({posts: req.app.locals.posts});
-});
+/* TODO: POST new log from user logged in home. */
+// router.get('/posts.json', function (req, res) {
+//   res.json({posts: req.app.locals.posts});
+// });
 
 /* GET login page.*/
 router.get('/login', function(req,res,next){
