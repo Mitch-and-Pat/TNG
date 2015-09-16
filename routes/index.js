@@ -12,15 +12,23 @@ router.get('/', function(req, res, next) {
       res.render('index', { title: 'Trekr' });
   } else {
     console.log(" -- login route -- ");
-    var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
-    var n = fs.readFileSync(__dirname + '/../db/' + cache + '_users.json');
-    var o = JSON.parse(n.toString());
-    console.log(o);
-    console.log(o[0]);
-    console.log(o.constructor);
-    res.render('login', { title: 'Login' });
+    res.redirect('/login');
   }
 });
+
+/* GET signup page.*/
+router.get('/login', function(req,res,next){
+    if (manifest.verify(req.query.user_name)){
+      console.log("A valid user_name has been submitted");
+        //Assign a cookie
+        res.cookie("userid" ,req.query.user_name);
+        //Redirect to their home feed
+        res.redirect( '/' );
+    } else {
+        res.render('login', { title: 'Login' });
+    }
+});
+
 
 /* GET signup page. */
 router.get('/signup', function(req, res, next) {
