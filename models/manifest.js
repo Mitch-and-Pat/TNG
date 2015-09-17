@@ -14,7 +14,7 @@ var Manifest = function() {
 
   // Rebuild Officers for each object in JSON array and push to this.officers
   for (var i = 0 ; i < currentList.length; i++) {
-    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email,currentList[i].user_name);
+    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email,currentList[i].user_name, currentList[i].transmissions);
     this.officers.push( newOfficer);
   }
 };
@@ -58,15 +58,13 @@ Manifest.prototype.getOfficer = function (username) {
   }
 };
 
-Manifest.prototype.linkLog = function (username, logObj) {
-  // TODO: Assign UIDs to each log entry and just "link" that to the user. Can't push the whole object.
-  // for (var i=0; i<this.officers.length; i++) {
-  //   if (username === this.officers[i].user_name) {
-  //     this.officers[i].transmissions.push(logObj);
-  //     console.log(this.officers[i]);
-  //   }
-  // }
-  // this.saveJSON();
+Manifest.prototype.linkLog = function (username, logIndex) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      this.officers[i].transmissions.push(logIndex);
+    }
+  }
+  this.saveJSON();
 };
 
 Manifest.prototype.saveJSON = function () {
