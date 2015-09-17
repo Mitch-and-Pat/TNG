@@ -8,16 +8,18 @@ function refreshUser() {
     method: "GET",
     datatype: "json",
     success: function (data) {
-      console.log(data);
       renderUser(data);
+    },
+    error: function (err) {
+      console.log("Failed GET");
     }
   });
-  console.log("User posts have been refreshed!");
+  // console.log("User posts have been refreshed!");
 }
 
 function renderUser(data) {
   $container = $(".user_transmissions_ol").text("");
-  data.forEach(function(element, index) {
+  data.logs.forEach(function(element, index) {
     // create DOM elements
       // li wrapper
       var $listitem = $("<li>");
@@ -47,9 +49,6 @@ function renderUser(data) {
     // Append list item to the list
       $container.prepend($listitem);
   });
-
-
-  // console.log(data);
 }
 
 refreshUser();
