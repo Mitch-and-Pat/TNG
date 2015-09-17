@@ -22,9 +22,6 @@ var Manifest = function() {
 
 Manifest.prototype.addOfficer = function(full_name,email,user_name) {
 
-  // Read cache from counter.txt file
-  var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
-
   // TODO: Set up warning if user already exists
   var userExists = false;
   if (userExists) {
@@ -38,9 +35,6 @@ Manifest.prototype.addOfficer = function(full_name,email,user_name) {
     this.officers.push(newOfficer);
     console.log(this.officers);
     this.saveJSON();
-  //   fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
-  // }
-  // fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
 }
 };
 
@@ -65,12 +59,14 @@ Manifest.prototype.getOfficer = function (username) {
 };
 
 Manifest.prototype.linkLog = function (username, logObj) {
-  for (var i=0; i<this.officers.length; i++) {
-    if (username === this.officers[i].user_name) {
-      this.officers[i].transmissions.push(logObj);
-    }
-  }
-  this.save();
+  // TODO: Assign UIDs to each log entry and just "link" that to the user. Can't push the whole object.
+  // for (var i=0; i<this.officers.length; i++) {
+  //   if (username === this.officers[i].user_name) {
+  //     this.officers[i].transmissions.push(logObj);
+  //     console.log(this.officers[i]);
+  //   }
+  // }
+  // this.saveJSON();
 };
 
 Manifest.prototype.saveJSON = function () {

@@ -17,19 +17,9 @@ router.get('/', function(req, res, next) {
 
 /* POST new log from user logged in home. */
 router.post('/newlog', function (req, res, next) {
-  var newlog;
-  console.log("Post submitted!");
-  // console.log(req.body.text);
-  // var linkOfficer = req.app.locals.manifest.getOfficer(req.cookies.userid);
   req.app.locals.shipslog.addLog(req.body.text, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
-  newLog = req.app.locals.shipslog.logs[req.app.locals.shipslog.logs.length - 1];
-  // var alllogs = req.app.locals.shipslog;
-  // var allusers = req.app.locals.manifest;
-  // console.log(linkOfficer.transmissions);
-  // console.log(req.app.locals.manifest.getOfficer("mitchl"));
-  // req.app.locals.manifest.getOfficer(req.cookies.userid);
-  // req.app.locals.manifest.getOfficer(req.cookies.userid).transmissions.push(newLog);
-  req.app.locals.manifest.linkLog(req.cookies.userid, newLog);
+  /*----The following won't work due to circular references!----*/
+  // req.app.locals.manifest.linkLog(req.cookies.userid, req.app.locals.shipslog.logs[req.app.locals.shipslog.logs.length - 1]);
   res.send("");
 });
 
