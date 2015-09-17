@@ -4,38 +4,44 @@ var _ = require('lodash');
 
 var Manifest = function() {
   this.officers = [];
+
+  // Read cache from counter.txt file
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
+
+  // Read last users.json file and parse into object
   var currentDB = fs.readFileSync(__dirname + '/../db/' + cache + '_users.json');
   var currentList = JSON.parse(currentDB.toString());
+
+  // Rebuild Officers for each object in JSON array and push to this.officers
   for (var i = 0 ; i < currentList.length; i++) {
     var newOfficer = new Officer(currentList[i].full_name, currentList[i].email,currentList[i].user_name);
     this.officers.push( newOfficer);
   }
-  //console.log(this.officers);
 };
 
 
 Manifest.prototype.addOfficer = function(full_name,email,user_name) {
+
+  // Read cache from counter.txt file
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
-  //console.log(cache);
+
+  // TODO: Set up warning if user already exists
   var userExists = false;
   if (userExists) {
-    var m = JSON.parse(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
     alert("That username is already taken. Please log in if it is you.");
   } else {
-    //console.log("Signup is posting!");
-    // console.log(full_name + " " + email + " " + user_name);
-    var newOfficer = new Officer(full_name,email,user_name);
-    // console.log(newOfficer);
-    // var n = fs.readFileSync(__dirname + '/../db/' + cache + '_users.json');
-    // var o = JSON.parse(n.toString());
-    // o[Object.keys(o).length] = newOfficer;
-    //console.log(o);
-    this.officers.push(newOfficer);
-    fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
-  }
-  fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
 
+    // Create new Officer with params passed to prototype
+    var newOfficer = new Officer(full_name,email,user_name);
+
+
+    this.officers.push(newOfficer);
+    console.log(this.officers);
+    this.saveJSON();
+  //   fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
+  // }
+  // fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
+}
 };
 
 Manifest.prototype.verify = function (username) {
@@ -67,10 +73,11 @@ Manifest.prototype.linkLog = function (username, logObj) {
   this.save();
 };
 
-Manifest.prototype.save = function () {
+Manifest.prototype.saveJSON = function () {
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
   fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
   fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
+  fs.unlink(__dirname + '/../db/' + (cache - 2) + '_users.json');
 };
 
 

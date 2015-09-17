@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var _ = require('lodash');
-// var Manifest = require('../models/manifest.js');
-// var ShipsLog = require('../models/shipslog.js');
+
 
 /* GET home page with login redirection. */
 router.get('/', function(req, res, next) {
