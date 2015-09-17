@@ -18,11 +18,19 @@ router.get('/', function(req, res, next) {
 
 /* POST new log from user logged in home. */
 router.post('/newlog', function (req, res, next) {
+  var newlog;
   console.log("Post submitted!");
-  console.log(req.body.text);
-  var linkOfficer = req.app.locals.manifest.getOfficer(req.cookies.userid);
-  var addedLog = req.app.locals.shipslog.addLog(req.body.text, req.body.img, linkOfficer);
-  req.app.locals.manifest.getOfficer(req.cookies.userid).transmissions.push(addedLog);
+  // console.log(req.body.text);
+  // var linkOfficer = req.app.locals.manifest.getOfficer(req.cookies.userid);
+  req.app.locals.shipslog.addLog(req.body.text, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
+  newLog = req.app.locals.shipslog.logs[req.app.locals.shipslog.logs.length - 1];
+  // var alllogs = req.app.locals.shipslog;
+  // var allusers = req.app.locals.manifest;
+  // console.log(linkOfficer.transmissions);
+  // console.log(req.app.locals.manifest.getOfficer("mitchl"));
+  // req.app.locals.manifest.getOfficer(req.cookies.userid);
+  // req.app.locals.manifest.getOfficer(req.cookies.userid).transmissions.push(newLog);
+  req.app.locals.manifest.linkLog(req.cookies.userid, newLog);
   res.send("");
 });
 
@@ -57,5 +65,11 @@ router.post('/signup', function (req, res) {
   //Redirect to their home feed
   res.redirect( '/' );
 });
+
+router.get('/stream', function (req, res) {
+  res.send(req.app.locals.shipslog);
+});
+
+
 
 module.exports = router;

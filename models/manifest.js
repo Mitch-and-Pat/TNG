@@ -24,12 +24,15 @@ Manifest.prototype.addOfficer = function(full_name,email,user_name) {
     alert("That username is already taken. Please log in if it is you.");
   } else {
     //console.log("Signup is posting!");
+    // console.log(full_name + " " + email + " " + user_name);
     var newOfficer = new Officer(full_name,email,user_name);
-    var n = fs.readFileSync(__dirname + '/../db/' + cache + '_users.json');
-    var o = JSON.parse(n.toString());
-    o[Object.keys(o).length] = newOfficer;
+    // console.log(newOfficer);
+    // var n = fs.readFileSync(__dirname + '/../db/' + cache + '_users.json');
+    // var o = JSON.parse(n.toString());
+    // o[Object.keys(o).length] = newOfficer;
     //console.log(o);
-    fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(o));
+    this.officers.push(newOfficer);
+    fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
   }
   fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
 
@@ -53,6 +56,21 @@ Manifest.prototype.getOfficer = function (username) {
       return this.officers[i];
     }
   }
+};
+
+Manifest.prototype.linkLog = function (username, logObj) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      this.officers[i].transmissions.push(logObj);
+    }
+  }
+  this.save();
+};
+
+Manifest.prototype.save = function () {
+  var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
+  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
+  fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
 };
 
 
