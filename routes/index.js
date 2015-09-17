@@ -8,7 +8,7 @@ var _ = require('lodash');
 router.get('/', function(req, res, next) {
   if(req.cookies.userid) {
       console.log(" -- index route -- ");
-      res.render('index', { title: 'Trekr' });
+      res.render('index',  req.app.locals.manifest.getOfficer(req.cookies.userid) );
   } else {
       console.log(" -- login route -- ");
       res.redirect('/login');
@@ -17,16 +17,12 @@ router.get('/', function(req, res, next) {
 
 /* POST new log from user logged in home. */
 router.post('/newlog', function (req, res, next) {
+  // Add log to shipslog
   req.app.locals.shipslog.addLog(req.body.text, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
-  /*----The following won't work due to circular references!----*/
-  // req.app.locals.manifest.linkLog(req.cookies.userid, req.app.locals.shipslog.logs[req.app.locals.shipslog.logs.length - 1]);
+  // Add log index number to officer transmissions array
+  req.app.locals.manifest.linkLog(req.cookies.userid, (req.app.locals.shipslog.logs.length - 1));
   res.send("");
 });
-
-/* TODO: POST new log from user logged in home. */
-// router.get('/posts.json', function (req, res) {
-//   res.json({posts: req.app.locals.posts});
-// });
 
 /* GET login page.*/
 router.get('/login', function(req,res,next){
@@ -55,6 +51,7 @@ router.post('/signup', function (req, res) {
   res.redirect( '/' );
 });
 
+/* GET stream refresh every X seconds. */
 router.get('/stream', function (req, res) {
   res.send(req.app.locals.shipslog);
 });
