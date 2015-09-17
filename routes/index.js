@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var _ = require('lodash');
-// var Manifest = require('../models/manifest.js');
-// var ShipsLog = require('../models/shipslog.js');
+
 
 /* GET home page with login redirection. */
 router.get('/', function(req, res, next) {
@@ -18,11 +17,9 @@ router.get('/', function(req, res, next) {
 
 /* POST new log from user logged in home. */
 router.post('/newlog', function (req, res, next) {
-  console.log("Post submitted!");
-  console.log(req.body.text);
-  var linkOfficer = req.app.locals.manifest.getOfficer(req.cookies.userid);
-  var addedLog = req.app.locals.shipslog.addLog(req.body.text, req.body.img, linkOfficer);
-  req.app.locals.manifest.getOfficer(req.cookies.userid).transmissions.push(addedLog);
+  req.app.locals.shipslog.addLog(req.body.text, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
+  /*----The following won't work due to circular references!----*/
+  // req.app.locals.manifest.linkLog(req.cookies.userid, req.app.locals.shipslog.logs[req.app.locals.shipslog.logs.length - 1]);
   res.send("");
 });
 
@@ -57,5 +54,11 @@ router.post('/signup', function (req, res) {
   //Redirect to their home feed
   res.redirect( '/' );
 });
+
+router.get('/stream', function (req, res) {
+  res.send(req.app.locals.shipslog);
+});
+
+
 
 module.exports = router;

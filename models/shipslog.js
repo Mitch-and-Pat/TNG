@@ -1,4 +1,5 @@
 var Log = require('./log.js');
+// var express = require('express');
 // var Manifest = require('./manifest.js');
 // var router = require('../routes/index.js');
 var fs = require('fs');
@@ -17,14 +18,17 @@ var ShipsLog = function () {
 };
 
 ShipsLog.prototype.addLog = function(text,img,user) {
-  var cache = parseInt(fs.readFileSync(__dirname + '/../db/log_counter.txt').toString());
   var newLog = new Log(text,img,user);
-  var n = fs.readFileSync(__dirname + '/../db/' + cache + '_logs.json');
-  var o = JSON.parse(n.toString());
-  o[Object.keys(o).length] = newLog;
-  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_logs.json', JSON.stringify(o));
+  // console.log(newLog);
+  this.logs.push(newLog);
+  this.saveJSON();
+};
+
+ShipsLog.prototype.saveJSON = function () {
+  var cache = parseInt(fs.readFileSync(__dirname + '/../db/log_counter.txt').toString());
+  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_logs.json', JSON.stringify(this.logs));
   fs.writeFileSync(__dirname + '/../db/log_counter.txt', (cache + 1));
-  return o[Object.keys(o).length];
+  fs.unlink(__dirname + '/../db/' + (cache - 2) + '_logs.json');
 };
 
 
