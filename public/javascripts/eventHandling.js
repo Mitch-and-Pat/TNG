@@ -26,11 +26,16 @@ $(document).ready(function () {
       }
     });
   });
-  $("#logout").bind("click", function (event) {
+  $("#logout").on("click", function (event) {
     jQuery.ajax({
       url: "/logout",
-      method: "GET"
-    });
+      method: "GET",
+      success: function() {
+        console.log("Horseblog is so 2019");
+      }
+    }).done(
+      function () {location.reload();}
+    );
   });
   // $("form.delete").submit(function (event) {
   //   event.preventDefault();

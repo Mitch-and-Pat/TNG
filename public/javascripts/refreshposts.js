@@ -30,7 +30,7 @@ function refreshPosts() {
       console.log( "you're UI isn't cool" );
     }
   });
-};
+}
 
 function renderPosts(data) {
   $container = $(".transmissions_ol").text("");
@@ -94,7 +94,7 @@ function renderPosts(data) {
         jQuery.ajax({
           url: "/delete/" + $(this).attr("id"),
           method: "DELETE",
-        });
+        }).done(refreshPosts());
       });
       $listitem.append($form);
     }
@@ -108,31 +108,31 @@ function renderPosts(data) {
 
   function setNumber( domElement , int ) {
     $( domElement ).text( int );
-  };
+  }
 
 
   function showOnePost(int) {
     var $transmissions = $( ".transmissions_ol" );
-    var numOfLis = $transmissions.children().length + 1;
+    var numOfLis = $transmissions.children().length;
     $transmissions.children().hide();
     var $thisPost = $($transmissions.children()[int]);
     $thisPost.show();
     //Set the count of this tweet
-    setNumber( "#tweet-number" , postCounter );
+    setNumber( "#tweet-number" , postCounter + 1 );
     //Set the count of total tweets
     setNumber( "#total-tweets" , numOfLis );
-  };
+  }
 
   function hideThisButton(varButton) {
     console.log("hide button function");
     $(varButton).prop("disabled",true);
     $( varButton ).css( "visibility", "hidden" );
-  };
+  }
 
   function showThisButton(varButton) {
     $( varButton ).prop("disabled",false);
     $( varButton ).css( "visibility", "visible" );
-  };
+  }
 
   //"Previous Tweet" Button Event Handler
   $( "#previous-tweet-button" ).bind( "click", function() {

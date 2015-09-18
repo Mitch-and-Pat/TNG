@@ -92,7 +92,8 @@
             36,
             37
         ],
-        "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg"
+        "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg",
+        "_locals": {}
     },
     {
         "full_name": "Q",
@@ -139,7 +140,10 @@
         "transmissions": [
             40,
             41,
-            42
+            42,
+            43,
+            44,
+            45
         ],
         "profile_photo": "https://2.bp.blogspot.com/-KuYPVs_2v7U/TlorO0irZGI/AAAAAAAACJ0/xnUEqzrtwR8/s1600/Sarek+VI+01.jpg",
         "_locals": {}

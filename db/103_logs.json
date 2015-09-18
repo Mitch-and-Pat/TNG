@@ -601,6 +601,7 @@
         },
         "relays": [],
         "favorites": [],
+        "deleted": true,
         "stardate": "1159.18 15.18.3"
     },
     {
@@ -619,5 +620,64 @@
         "relays": [],
         "favorites": [],
         "stardate": "1159.18 15.18.27"
+    },
+    {
+        "text": "Peace b with u",
+        "img": "",
+        "user": {
+            "full_name": "Sarek",
+            "email": "sarek@vulcan.gov",
+            "user_name": "sarek1",
+            "transmissions": [
+                40,
+                41
+            ],
+            "profile_photo": "https://2.bp.blogspot.com/-KuYPVs_2v7U/TlorO0irZGI/AAAAAAAACJ0/xnUEqzrtwR8/s1600/Sarek+VI+01.jpg",
+            "_locals": {}
+        },
+        "relays": [],
+        "favorites": []
+    },
+    {
+        "text": "& also witchu",
+        "img": "",
+        "user": {
+            "full_name": "Sarek",
+            "email": "sarek@vulcan.gov",
+            "user_name": "sarek1",
+            "transmissions": [
+                40,
+                41,
+                42
+            ],
+            "profile_photo": "https://2.bp.blogspot.com/-KuYPVs_2v7U/TlorO0irZGI/AAAAAAAACJ0/xnUEqzrtwR8/s1600/Sarek+VI+01.jpg",
+            "_locals": {}
+        },
+        "relays": [],
+        "favorites": [],
+        "deleted": true,
+        "stardate": "11509.18 15.35.53"
+    },
+    {
+        "text": "I want to be left aloooone",
+        "img": "",
+        "user": {
+            "full_name": "Sarek",
+            "email": "sarek@vulcan.gov",
+            "user_name": "sarek1",
+            "transmissions": [
+                40,
+                41,
+                42,
+                43,
+                44
+            ],
+            "profile_photo": "https://2.bp.blogspot.com/-KuYPVs_2v7U/TlorO0irZGI/AAAAAAAACJ0/xnUEqzrtwR8/s1600/Sarek+VI+01.jpg",
+            "_locals": {}
+        },
+        "relays": [],
+        "favorites": [],
+        "deleted": true,
+        "stardate": "11509.18 15.42.43"
     }
 ]
