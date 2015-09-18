@@ -32,20 +32,20 @@ $(document).ready(function () {
       method: "GET"
     });
   });
-  $(".delete").bind("submit", function (event) {
-    console.log("Delete event is beginning.");
-    event.preventDefault();
-    // var logIndex = $(this).attr("id");
-    // var user_name = $(this).attr("name");
-    jQuery.ajax({
-      url: ("/delete/" + $(this).attr("id")),
-      method: "GET",
-      // data: {
-      //   "index": logIndex,
-      //   "user_name": user_name
-      // }
-    });
-  });
+  // $("form.delete").submit(function (event) {
+  //   event.preventDefault();
+  //   console.log("Delete event is beginning.");
+  //   // var logIndex = $(this).attr("id");
+  //   // var user_name = $(this).attr("name");
+  //   jQuery.ajax({
+  //     url: "/",
+  //     method: "DELETE",
+  //     data: {
+  //       "index": logIndex,
+  //       "user_name": user_name
+  //     }
+  //   });
+  // });
 });
 
 /* ----- To insert in index.hbs ------*/

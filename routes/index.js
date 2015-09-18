@@ -17,19 +17,28 @@ router.get('/', function(req, res, next) {
 
 /* POST new log from user logged in home. */
 router.post('/newlog', function (req, res, next) {
+  // Check for @ mentions
+  var arr = req.body.text.split(" ");
+  for (var i=0; i<arr.length; i++) {
+    if ((arr[i].indexOf("@") >= 0) && (req.app.locals.manifest.verify(arr[i].slice(1, arr[i].length)))) {
+      arr[i] = "<a href='/users/" + arr[i].slice(1, arr[i].length) + "'>" + arr[i] + "</a>";
+    }
+  var parsedLog = arr.join(" ");
+  console.log(parsedLog);
+  }
   // Add log to shipslog
-  req.app.locals.shipslog.addLog(req.body.text, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
+  req.app.locals.shipslog.addLog(parsedLog, req.body.img, req.app.locals.manifest.getOfficer(req.cookies.userid));
   // Add log index number to officer transmissions array
   req.app.locals.manifest.linkLog(req.cookies.userid, (req.app.locals.shipslog.logs.length - 1));
   res.send("");
 });
 
-router.get('/delete/:id', function (req, res, next) {
-  console.log(req.params.id);
-  console.log(req.cookies.userid);
-  // req.app.locals.shipslog.removeLog(req.query.index);
-  // req.app.locals.manifest.unlinkLog(req.query.user_name, req.query.index);
-  res.redirect("/");
+router.delete('/delete/:id', function (req, res, next) {
+  // Remove log from shipslog instance (set delete flag) and save JSON
+  req.app.locals.shipslog.removeLog(req.params.id, req.query.user_name);
+  // Remove log from user transmissions array and save JSON
+  req.app.locals.manifest.unlinkLog(req.query.user_name, req.params.id);
+  res.sendStatus(200);
 });
 
 /* GET login page.*/
@@ -63,7 +72,7 @@ router.get('/signup', function(req, res, next) {
 
 /* POST signup interaction. */
 router.post('/signup', function (req, res) {
-  req.app.locals.manifest.addOfficer( req.body.full_name, req.body.email, req.body.user_name);
+  req.app.locals.manifest.addOfficer( req.body.full_name, req.body.email, req.body.user_name, [], req.body.profile_photo);
   res.cookie("userid" ,req.body.user_name);
   //Redirect to their home feed
   res.redirect( '/' );

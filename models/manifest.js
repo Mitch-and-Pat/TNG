@@ -14,7 +14,7 @@ var Manifest = function() {
 
   // Rebuild Officers for each object in JSON array and push to this.officers
   for (var i = 0 ; i < currentList.length; i++) {
-    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email,currentList[i].user_name, currentList[i].transmissions);
+    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email, currentList[i].user_name, currentList[i].transmissions, currentList[i].profile_photo);
     this.officers.push( newOfficer);
   }
 };
@@ -29,7 +29,7 @@ Manifest.prototype.addOfficer = function(full_name,email,user_name) {
   } else {
 
     // Create new Officer with params passed to prototype
-    var newOfficer = new Officer(full_name,email,user_name);
+    var newOfficer = new Officer(full_name,email,user_name, [], profile_photo);
 
 
     this.officers.push(newOfficer);

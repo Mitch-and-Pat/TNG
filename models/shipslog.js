@@ -12,7 +12,7 @@ var ShipsLog = function () {
   var currentDB = fs.readFileSync(__dirname + '/../db/' + cache + '_logs.json');
   var currentList = JSON.parse(currentDB.toString());
   for (var i = 0 ; i < currentList.length; i++) {
-    var newLog = new Log(currentList[i].text, currentList[i].img, currentList[i].user);
+    var newLog = new Log(currentList[i].text, currentList[i].img, currentList[i].user, currentList[i].deleted);
     this.logs.push( newLog);
   }
 };
@@ -24,8 +24,9 @@ ShipsLog.prototype.addLog = function(text,img,user) {
   this.saveJSON();
 };
 
-ShipsLog.prototype.removeLog = function(index) {
-  this.logs[index] = {};
+ShipsLog.prototype.removeLog = function(index, user_name) {
+
+  this.logs[index].deleted = true;
   this.saveJSON();
 };
 
