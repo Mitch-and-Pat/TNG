@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+
+var postCounter = 0;
+
 function refreshPosts() {
   jQuery.ajax({
     url: "/stream",
@@ -8,9 +11,26 @@ function refreshPosts() {
     success: function (data) {
       renderPosts(data);
     }
+  }).done(function() {
+    console.log("Posts have been refreshed!");
+    if ( $( "#__this_page_has_previous_and_next_buttons")[0] !== undefined && postCounter === 0 ) {
+      showOnePost(postCounter);
+      hideThisButton( "#previous-tweet-button" );
+      console.log("you're looking at the first post");
+    } else if ( $( "#__this_page_has_previous_and_next_buttons")[0] !== undefined && postCounter === ($(".transmissions_ol").children().length-1)) {
+      showOnePost(postCounter);
+      hideThisButton( "#next-tweet-button" );
+      console.log("you're looking at the last post");
+    } else if ( $( "#__this_page_has_previous_and_next_buttons")[0] !== undefined) {
+      showOnePost(postCounter);
+      showThisButton( "#previous-tweet-button" );
+      showThisButton( "#next-tweet-button" );
+      console.log( "you're looking at the a post, but not the first or last" );
+    } else {
+      console.log( "you're UI isn't cool" );
+    }
   });
-  console.log("Posts have been refreshed!");
-}
+};
 
 function renderPosts(data) {
   $container = $(".transmissions_ol").text("");
@@ -86,6 +106,51 @@ function renderPosts(data) {
 
 }
 
-refreshPosts();
-window.setInterval( function() { refreshPosts(); }, 10000 );
+  function setNumber( domElement , int ) {
+    $( domElement ).text( int );
+  };
+
+
+  function showOnePost(int) {
+    var $transmissions = $( ".transmissions_ol" );
+    var numOfLis = $transmissions.children().length + 1;
+    $transmissions.children().hide();
+    var $thisPost = $($transmissions.children()[int]);
+    $thisPost.show();
+    //Set the count of this tweet
+    setNumber( "#tweet-number" , postCounter );
+    //Set the count of total tweets
+    setNumber( "#total-tweets" , numOfLis );
+  };
+
+  function hideThisButton(varButton) {
+    console.log("hide button function");
+    $(varButton).prop("disabled",true);
+    $( varButton ).css( "visibility", "hidden" );
+  };
+
+  function showThisButton(varButton) {
+    $( varButton ).prop("disabled",false);
+    $( varButton ).css( "visibility", "visible" );
+  };
+
+  //"Previous Tweet" Button Event Handler
+  $( "#previous-tweet-button" ).bind( "click", function() {
+    console.log("User clicked the 'previous' button");
+    postCounter -= 1;
+    refreshPosts();
+  });
+  //"Next Tweet" Button Event Handler
+  $( "#next-tweet-button" ).bind( "click", function() {
+    console.log("User clicked the 'next' button");
+    postCounter += 1;
+    refreshPosts();
+  });
+
+  if ( $("#__this_page_has_previous_and_next_buttons")[0] === undefined ) {
+    refreshPosts();
+    window.setInterval( function() { refreshPosts(); }, 10000 );
+  } else {
+    refreshPosts();
+  }
 });

@@ -5,9 +5,12 @@
     <div class="profile_header_row_01">
         <h1> {{ full_name }} transmissions --
           <span id="tweet-number">
-            02
+            0
           </span>
-          <span id="total-tweets">/08</span>
+          /
+          <span id="total-tweets">
+            0
+          </span>
         </h1>
     </div><!-- end profile_header_row_01 -->
     <div class="profile_header_row_02">
@@ -16,9 +19,9 @@
           <button>809-312</button>
           <button id="logout">logout</button>
         </div>
-        <div class="button-row-two">
-          <button id="previous-tweet">previous</button>
-          <button>next</button>
+        <div class="button-row-two" id="__this_page_has_previous_and_next_buttons">
+          <button id="previous-tweet-button" role="button">previous</button>
+          <button id="next-tweet-button" role="button">next</button>
         </div>
       </div>
         <div class="officer-profile">
@@ -30,7 +33,7 @@
   </div><!-- end top-block -->
   <div class="bottom-block">
     <div class="left-side">
-      <div class="stream" style="background:rgba(200,200,200,1.0)">
+      <div class="stream">
           <ol class="transmissions_ol">
               <!-- <li class="transmission_li">
                   <img src="http://placehold.it/100x100"/>
