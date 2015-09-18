@@ -1,8 +1,9 @@
-function Officer (full_name, email, user_name, transmissions) {
+function Officer (full_name, email, user_name, transmissions, profile_photo) {
   this.full_name = full_name;
   this.email = email;
   this.user_name = user_name;
   this.transmissions = transmissions;
+  this.profile_photo = profile_photo || "http://lorempixel.com/100/100/people";
 }
 
 Officer.prototype.getTransmissions = function() {

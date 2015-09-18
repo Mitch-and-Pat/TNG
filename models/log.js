@@ -1,4 +1,4 @@
-var Log = function (text, img, user) {
+var Log = function (text, img, user, deleted) {
   // Do we need an ID?
   // this.id = randomID;
   this.text = text;
@@ -6,6 +6,7 @@ var Log = function (text, img, user) {
   this.user = user;
   this.relays = [];
   this.favorites = [];
+  this.deleted = deleted;
 };
 
 // Log.prototype.

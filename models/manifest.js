@@ -14,7 +14,7 @@ var Manifest = function() {
 
   // Rebuild Officers for each object in JSON array and push to this.officers
   for (var i = 0 ; i < currentList.length; i++) {
-    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email,currentList[i].user_name, currentList[i].transmissions);
+    var newOfficer = new Officer(currentList[i].full_name, currentList[i].email, currentList[i].user_name, currentList[i].transmissions, currentList[i].profile_photo);
     this.officers.push( newOfficer);
   }
 };
@@ -29,7 +29,7 @@ Manifest.prototype.addOfficer = function(full_name,email,user_name) {
   } else {
 
     // Create new Officer with params passed to prototype
-    var newOfficer = new Officer(full_name,email,user_name);
+    var newOfficer = new Officer(full_name,email,user_name, [], profile_photo);
 
 
     this.officers.push(newOfficer);
@@ -58,6 +58,14 @@ Manifest.prototype.getOfficer = function (username) {
   }
 };
 
+Manifest.prototype.getTransmissions = function (username) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      return this.officers[i].transmissions;
+    }
+  }
+};
+
 Manifest.prototype.linkLog = function (username, logIndex) {
   for (var i=0; i<this.officers.length; i++) {
     if (username === this.officers[i].user_name) {
@@ -67,11 +75,23 @@ Manifest.prototype.linkLog = function (username, logIndex) {
   this.saveJSON();
 };
 
+Manifest.prototype.unlinkLog = function (username, logIndex) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      for (var j=0; i<this.officers[i].transmissions.length; j++)
+        if (logIndex === this.officers[i].transmissions[j])
+          this.officers[i].transmissions.splice(j, 1);
+    }
+  }
+  this.saveJSON();
+};
+
 Manifest.prototype.saveJSON = function () {
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
-  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
+  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers, null, 4));
   fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
   fs.unlink(__dirname + '/../db/' + (cache - 2) + '_users.json');
+  console.log("===== manifest has been saved =====");
 };
 
 
