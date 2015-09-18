@@ -399,7 +399,13 @@
             "full_name": "Mitch",
             "email": "m@m.com",
             "user_name": "mitchl",
-            "transmissions": [],
+            "transmissions": [
+                31,
+                32,
+                33,
+                38
+            ],
+            "profile_photo": "http://i.imgur.com/CoaGpBl.jpg?1",
             "_locals": {}
         },
         "relays": [],
@@ -445,8 +451,13 @@
             "full_name": "Crystalline Entity",
             "email": "nunya@bizness.com",
             "user_name": "siliconovercarbon",
-            "transmissions": [],
-            "_locals": {}
+            "transmissions": [
+                34,
+                35,
+                36,
+                37
+            ],
+            "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg"
         },
         "relays": [],
         "favorites": []
@@ -459,9 +470,12 @@
             "email": "nunya@bizness.com",
             "user_name": "siliconovercarbon",
             "transmissions": [
-                34
+                34,
+                35,
+                36,
+                37
             ],
-            "_locals": {}
+            "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg"
         },
         "relays": [],
         "favorites": []
@@ -475,9 +489,11 @@
             "user_name": "siliconovercarbon",
             "transmissions": [
                 34,
-                35
+                35,
+                36,
+                37
             ],
-            "_locals": {}
+            "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg"
         },
         "relays": [],
         "favorites": []
@@ -492,8 +508,10 @@
             "transmissions": [
                 34,
                 35,
-                36
-            ]
+                36,
+                37
+            ],
+            "profile_photo": "http://www.treknews.net/wp-content/uploads/2012/07/star-trek-tng-bluray-review-crystalline-entity.jpg"
         },
         "relays": [],
         "favorites": []
