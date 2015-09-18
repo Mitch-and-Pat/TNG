@@ -7,8 +7,6 @@ function refreshPosts() {
     datatype: "json",
     success: function (data) {
       renderPosts(data);
-      // $("transmissions_ol")
-      // console.log("Success!");
     }
   });
   console.log("Posts have been refreshed!");
@@ -41,7 +39,28 @@ function renderPosts(data) {
       $favorite.text(element.favorites.length);
 
     // Organize the DOM elements
-      $listitem.append($profileimage, $names, $stardate, $content, $relay, $favorite);
+    $listitem.append($profileimage, $names, $stardate, $content, $relay, $favorite);
+
+    // Add delete button if cookie user and element user match
+    if (document.cookie.split("=")[1] === element.user.user_name) {
+      // Make elements
+      var me = element.user.user_name;
+      var $form = $("<form>");
+      var $delete = $("<button>");
+
+      // Set attributes
+      $delete.attr("name", me);
+      $delete.attr("id", index);
+      $delete.text("Delete");
+      $form.attr("action", "/");
+      $form.attr("method", "get");
+      $form.attr("class", "delete");
+
+
+      // Append to log
+      $form.append($delete);
+      $listitem.append($form);
+    }
 
     // Append list item to the list
       $container.prepend($listitem);
@@ -52,5 +71,5 @@ function renderPosts(data) {
 }
 
 refreshPosts();
-window.setInterval( function() { refreshPosts() }, 10000 );
+window.setInterval( function() { refreshPosts(); }, 10000 );
 });
