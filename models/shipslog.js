@@ -12,14 +12,14 @@ var ShipsLog = function () {
   var currentDB = fs.readFileSync(__dirname + '/../db/' + cache + '_logs.json');
   var currentList = JSON.parse(currentDB.toString());
   for (var i = 0 ; i < currentList.length; i++) {
-    var newLog = new Log(currentList[i].text, currentList[i].img, currentList[i].user, currentList[i].deleted);
+    var newLog = new Log(currentList[i].text, currentList[i].img, currentList[i].user, currentList[i].deleted, currentList[i].stardate);
     this.logs.push( newLog);
   }
 };
 
 ShipsLog.prototype.addLog = function(text,img,user) {
   var newLog = new Log(text,img,user);
-  // console.log(newLog);
+  newLog.setStardate();
   this.logs.push(newLog);
   this.saveJSON();
 };

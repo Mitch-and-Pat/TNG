@@ -20,7 +20,7 @@ var Manifest = function() {
 };
 
 
-Manifest.prototype.addOfficer = function(full_name,email,user_name) {
+Manifest.prototype.addOfficer = function(full_name,email,user_name, transmissions, profile_photo) {
 
   // TODO: Set up warning if user already exists
   var userExists = false;

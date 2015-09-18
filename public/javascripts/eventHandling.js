@@ -26,7 +26,7 @@ $(document).ready(function () {
       }
     });
   });
-  $("#logout").bind("submit", function (event) {
+  $("#logout").bind("click", function (event) {
     jQuery.ajax({
       url: "/logout",
       method: "GET"

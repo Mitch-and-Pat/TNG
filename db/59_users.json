@@ -17,8 +17,7 @@
             38,
             39
         ],
-        "profile_photo": "http://i.imgur.com/CoaGpBl.jpg?1",
-        "_locals": {}
+        "profile_photo": "http://i.imgur.com/CoaGpBl.jpg?1"
     },
     {
         "full_name": "Pat",
@@ -132,5 +131,17 @@
         "email": "tuvok@voyager.net",
         "user_name": "tuvok",
         "profile_photo": "http://lorempixel.com/100/100/people"
+    },
+    {
+        "full_name": "Sarek",
+        "email": "sarek@vulcan.gov",
+        "user_name": "sarek1",
+        "transmissions": [
+            40,
+            41,
+            42
+        ],
+        "profile_photo": "https://2.bp.blogspot.com/-KuYPVs_2v7U/TlorO0irZGI/AAAAAAAACJ0/xnUEqzrtwR8/s1600/Sarek+VI+01.jpg",
+        "_locals": {}
     }
 ]
