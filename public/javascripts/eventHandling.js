@@ -19,7 +19,38 @@ $(document).ready(function () {
       data: {
         "text": log,
         "img": image
+      },
+      complete: function () {
+        $("textarea[name=log]").val("");
+        $("input[name=image]").val("");
       }
     });
   });
+  $("#logout").bind("submit", function (event) {
+    jQuery.ajax({
+      url: "/logout",
+      method: "GET"
+    });
+  });
+  // $("form.delete").submit(function (event) {
+  //   event.preventDefault();
+  //   console.log("Delete event is beginning.");
+  //   // var logIndex = $(this).attr("id");
+  //   // var user_name = $(this).attr("name");
+  //   jQuery.ajax({
+  //     url: "/",
+  //     method: "DELETE",
+  //     data: {
+  //       "index": logIndex,
+  //       "user_name": user_name
+  //     }
+  //   });
+  // });
 });
+
+/* ----- To insert in index.hbs ------*/
+// <div class="logout-button">
+//    <form action='/logout' method="get" id='logout'>
+//     <input type='submit' value='Logout'></input>
+//    </form>
+// </div>

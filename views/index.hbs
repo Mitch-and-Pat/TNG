@@ -1,33 +1,97 @@
-<h1>Trekr</h1>
-<p>Welcome to Trekr</p>
 <script type="text/javascript" src='/javascripts/refreshPosts.js'></script>
 
+<div class="foreground-divs">
+  <div class="top-block">
+    <div class="profile_header_row_01">
+        <h1> {{ full_name }} transmissions --
+          <span id="tweet-number">
+            02
+          </span>
+          <span id="total-tweets">/08</span>
+        </h1>
+    </div><!-- end profile_header_row_01 -->
+    <div class="profile_header_row_02">
+      <div class="nav-controls">
+        <div class="button-row-one">
+          <button>809-312</button>
+          <button>logout</button>
+        </div>
+        <div class="button-row-two">
+          <button id="previous-tweet">previous</button>
+          <button>next</button>
+        </div>
+      </div>
+        <div class="officer-profile">
+          <img src="http://placehold.it/1500x1500" />
+          <h2 class=""></h2>
+          <h3 class=""> {{ user_name }} </h3>
+        </div>
+      </div><!-- end profile_header_row_02 -->
+  </div><!-- end top-block -->
+  <div class="bottom-block">
+    <div class="left-side">
+      <div class="stream" style="background:rgba(200,200,200,1.0)">
+          <ol class="transmissions_ol">
+              <!-- <li class="transmission_li">
+                  <img src="http://placehold.it/100x100"/>
+                  <a href="#"></a>
+                  <p></p>
+                  <button>Relay</button>
+                  <button>Favorite</button>
+              </li> -->
+          </ol>
+      </div><!-- end stream -->
+    </div><!-- end left-side -->
+    <div class="right-side">
+      <div class="log-box">
+        <form action='/' method="post" id='log'>
+          <label for='log'>What are your aspirations in this perfect society?</label>
+          <textarea name='log'></textarea>
+          <label for='image'>(path to an image)</label>
+          <input type='url' name='image'></input>
+          <input type='submit' value='Submit'></input>
+        </form>
+      </div>
+   </div> <!-- end right-side -->
+ </div><!-- end bottom-block -->
+</div><!-- end foreground-divs -->
 
-<div id="profile-card" style="background:red">
-        <img src="http://placehold.it/100x100" />
-        <h2 class=""> {{ full_name }} </h2>
-        <h3 class=""> {{ user_name }} </h3>
-</div>
 
-<div class="log-box">
-  <form action='/' method="post" id='log'>
-    <label for='log'>What are your aspirations in this perfect society?</label>
-    <textarea name='log'></textarea>
-    <label for='image'>(path to an image)</label>
-    <input type='url' name='image'></input>
-    <input type='submit' value='Submit'></input>
-  </form>
-</div>
 
-<div class="stream" style="background:rgba(200,200,200,1.0)">
-    <ol class="transmissions_ol">
 
-        <!-- <li class="transmission_li">
-            <img src="http://placehold.it/100x100"/>
-            <a href="#"></a>
-            <p></p>
-            <button>Relay</button>
-            <button>Favorite</button>
-        </li> -->
-    </ol>
-</div>
+
+
+<div class="background-divs">
+  <div class="top-half-background">
+    <div class="row _row-1">
+      <div id="_div-a" class="lcars_block"></div>
+    </div>
+    <div class="row _row-2">
+      <div id="_div-b" class="lcars_block"></div>
+      <div id="_div-c" class="lcars_block"></div>
+      <div id="_div-d" class="lcars_block"></div>
+      <div id="_div-e" class="lcars_block"></div>
+      <div id="_div-f" class="lcars_block"></div>
+    </div>
+  </div>
+  <div class="bottom-half-background">
+    <div class="row _row-3">
+      <div id="_div-g" class="lcars_block"></div>
+      <div id="_div-h" class="lcars_block"></div>
+      <div id="_div-i" class="lcars_block"></div>
+      <div id="_div-j" class="lcars_block"></div>
+      <div id="_div-k" class="lcars_block"></div>
+      <div id="_div-l" class="lcars_block"></div>
+    </div>
+    <div class="row _row-4">
+      <div id="_div-m" class="lcars_block"></div>
+    </div>
+    <div class="row _row-5">
+      <div id="_div-n" class="lcars_block"></div>
+    </div>
+    <div class="row _row-6">
+      <div id="_div-o" class="lcars_block"></div>
+      <div id="_div-p" class="lcars_block"></div>
+    </div>
+ </div>
+</div><!-- end background-divs -->
