@@ -61,8 +61,6 @@ router.get('/login', function(req,res,next){
 /* GET logout page.*/
 router.get('/logout', function(req,res,next){
     res.clearCookie('userid');
-    //Redirect to their home feed
-    res.redirect( '/' );
 });
 
 /* GET signup page. */
