@@ -33,8 +33,14 @@ function renderPosts(data) {
       var $favorite = $("<button>");
 
     // Add content to DOM elements
-      $profileimage.attr("src", "http://lorempixel.com/100/100"); //element.user.img
-      $names.text(element.user.full_name + " " + element.user.user_name);
+      $profileimage.attr("src", element.user.profile_photo);
+      // TODO: Add to main .css file!
+      $profileimage.css({
+        "max-width": "100px",
+        "max-height": "100px"
+      });
+      $names.text(element.user.full_name + " @" + element.user.user_name + " ");
+      $names.attr("href", "/users/" + element.user.user_name);
       $stardate.text("Sunday");
       $content.html(element.text);
       $relay.text(element.relays.length);
