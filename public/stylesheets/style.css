@@ -175,7 +175,7 @@ float: right;
   position: relative;
   display: block;/*set to block*/
   z-index: 100;
-  background: rgba(100,100,100,1.0);
+  /*background: rgba(100,100,100,1.0);*/
 }
 
 .log-box{
@@ -187,13 +187,15 @@ float: right;
 
 .transmissions_ol {
   height: 10em;
-  width: 7em;
+  width: 100%;
   display: block;
   margin: 0 auto;
-  background: blue;
+
 }
 .transmissions_ol li{
+
   display: block;
+  width: 100%;
 }
 
 
