@@ -3,7 +3,7 @@ function Officer (full_name, email, user_name, transmissions, profile_photo) {
   this.email = email;
   this.user_name = user_name;
   this.transmissions = transmissions;
-  this.profile_photo = profile_photo || "http://lorempixel.com/100/100/people";
+  this.profile_photo = "http://lorempixel.com/100/100/people" && profile_photo;
 }
 
 Officer.prototype.getTransmissions = function() {
