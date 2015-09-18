@@ -15,6 +15,8 @@ function refreshPosts() {
 function renderPosts(data) {
   $container = $(".transmissions_ol").text("");
   data.logs.forEach(function(element, index) {
+    // Check for and skip deleted flags
+    if (element.deleted !== true) {
     // create DOM elements
       // li wrapper
       var $listitem = $("<li>");
@@ -34,7 +36,7 @@ function renderPosts(data) {
       $profileimage.attr("src", "http://lorempixel.com/100/100"); //element.user.img
       $names.text(element.user.full_name + " " + element.user.user_name);
       $stardate.text("Sunday");
-      $content.text(element.text);
+      $content.html(element.text);
       $relay.text(element.relays.length);
       $favorite.text(element.favorites.length);
 
@@ -50,24 +52,32 @@ function renderPosts(data) {
 
       // Set attributes
       $delete.attr("name", me);
-      $delete.attr("id", index);
+      $delete.attr("class", "delete");
       $delete.text("Delete");
       $form.attr("action", "/");
-      $form.attr("method", "get");
+      $form.attr("method", "delete");
       $form.attr("class", "delete");
+      $form.attr("id", index);
 
 
       // Append to log
       $form.append($delete);
+      $form.submit(function (event) {
+        event.preventDefault();
+        var logIndex = $(this).attr("id");
+        jQuery.ajax({
+          url: "/delete/" + $(this).attr("id"),
+          method: "DELETE",
+        });
+      });
       $listitem.append($form);
     }
 
     // Append list item to the list
       $container.prepend($listitem);
+    }
   });
 
-
-  // console.log(data);
 }
 
 refreshPosts();

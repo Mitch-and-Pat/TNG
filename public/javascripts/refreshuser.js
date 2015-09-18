@@ -20,6 +20,7 @@ function refreshUser() {
 function renderUser(data) {
   $container = $(".user_transmissions_ol").text("");
   data.logs.forEach(function(element, index) {
+    if (element) {
     // create DOM elements
       // li wrapper
       var $listitem = $("<li>");
@@ -39,7 +40,7 @@ function renderUser(data) {
       $profileimage.attr("src", "http://lorempixel.com/100/100"); //element.user.img
       $names.text(element.user.full_name + " " + element.user.user_name);
       $stardate.text("Sunday");
-      $content.text(element.text);
+      $content.html(element.text);
       $relay.text(element.relays.length);
       $favorite.text(element.favorites.length);
 
@@ -48,6 +49,7 @@ function renderUser(data) {
 
     // Append list item to the list
       $container.prepend($listitem);
+    }
   });
 }
 
