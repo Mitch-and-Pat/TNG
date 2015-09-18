@@ -24,6 +24,14 @@ router.post('/newlog', function (req, res, next) {
   res.send("");
 });
 
+router.get('/delete/:id', function (req, res, next) {
+  console.log(req.params.id);
+  console.log(req.cookies.userid);
+  // req.app.locals.shipslog.removeLog(req.query.index);
+  // req.app.locals.manifest.unlinkLog(req.query.user_name, req.query.index);
+  res.redirect("/");
+});
+
 /* GET login page.*/
 router.get('/login', function(req,res,next){
     if (req.app.locals.manifest.verify(req.query.user_name)){
@@ -32,11 +40,21 @@ router.get('/login', function(req,res,next){
         res.cookie("userid" ,req.query.user_name);
         //Redirect to their home feed
         res.redirect( '/' );
+    } else if (!req.query.user_name) {
+      res.render('login', { title: 'Login' });
     } else {
-        res.render('login', { title: 'Login' });
+      // TODO: Make a better version with a pop-up
+      // res.render('accessdenied');
+      res.render('login', { title: 'Login' });
     }
 });
 
+/* GET logout page.*/
+router.get('/logout', function(req,res,next){
+    res.clearCookie('userid');
+    //Redirect to their home feed
+    res.redirect( '/' );
+});
 
 /* GET signup page. */
 router.get('/signup', function(req, res, next) {

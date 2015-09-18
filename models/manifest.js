@@ -58,6 +58,14 @@ Manifest.prototype.getOfficer = function (username) {
   }
 };
 
+Manifest.prototype.getTransmissions = function (username) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      return this.officers[i].transmissions;
+    }
+  }
+};
+
 Manifest.prototype.linkLog = function (username, logIndex) {
   for (var i=0; i<this.officers.length; i++) {
     if (username === this.officers[i].user_name) {
@@ -67,11 +75,23 @@ Manifest.prototype.linkLog = function (username, logIndex) {
   this.saveJSON();
 };
 
+Manifest.prototype.unlinkLog = function (username, logIndex) {
+  for (var i=0; i<this.officers.length; i++) {
+    if (username === this.officers[i].user_name) {
+      for (var j=0; i<this.officers[i].transmissions.length; j++)
+        if (logIndex === this.officers[i].transmissions[j])
+          this.officers[i].transmissions.splice(j, 1);
+    }
+  }
+  this.saveJSON();
+};
+
 Manifest.prototype.saveJSON = function () {
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/counter.txt').toString());
-  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers));
+  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_users.json', JSON.stringify(this.officers, null, 4));
   fs.writeFileSync(__dirname + '/../db/counter.txt', (cache + 1));
   fs.unlink(__dirname + '/../db/' + (cache - 2) + '_users.json');
+  console.log("===== manifest has been saved =====");
 };
 
 

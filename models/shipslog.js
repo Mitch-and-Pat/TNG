@@ -24,11 +24,17 @@ ShipsLog.prototype.addLog = function(text,img,user) {
   this.saveJSON();
 };
 
+ShipsLog.prototype.removeLog = function(index) {
+  this.logs[index] = {};
+  this.saveJSON();
+};
+
 ShipsLog.prototype.saveJSON = function () {
   var cache = parseInt(fs.readFileSync(__dirname + '/../db/log_counter.txt').toString());
-  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_logs.json', JSON.stringify(this.logs));
+  fs.writeFileSync(__dirname + '/../db/' + (cache + 1) + '_logs.json', JSON.stringify(this.logs, null, 4));
   fs.writeFileSync(__dirname + '/../db/log_counter.txt', (cache + 1));
   fs.unlink(__dirname + '/../db/' + (cache - 2) + '_logs.json');
+  console.log("===== shipslog has been saved =====");
 };
 
 
